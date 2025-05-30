@@ -48,22 +48,31 @@
     }
 
    .photo-container {
-  max-width: 500px;
-  margin-top: 20px;
+  position: fixed; /* fixa na tela */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90vw;
+  max-height: 90vh;
   display: none;
-  transition: all 0.5s;
+  z-index: 999; /* fica na frente */
+  background: rgba(255, 230, 240, 0.9);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(214, 50, 106, 0.7);
 }
 
-    .photo-container.visible {
-      display: block;
-    }
+.photo-container.visible {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .photo-container img {
-  width: 100%;
-  height: auto;
-  display: block;
+.photo-container img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 15px;
   user-select: none;
-  border-radius: 10px;
 }
   </style>
 </head>
