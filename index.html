@@ -5,4 +5,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Presente para Você 💖</title>
   <style>
-    
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+
+    body {
+      margin: 0;
+      background: #ffe6f0;
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #d6326a;
+      overflow-x: hidden;
+    }
+
+    .heart-container {
+      text-align: center;
+      cursor: pointer;
+      filter: drop-shadow(2px 4px 6px rgba(214, 50, 106, 0.4));
+      margin-bottom: 30px;
+    }
+
+    .phrase {
+      font-size: 1.4em;
+      margin-bottom: 20px;
+      transition: opacity 0.4s;
+    }
+
+    .heart {
+      position: relative;
+      width: 100px;
+      height: 90px;
+      margin: 0 auto;
+      transform: rotate(-45deg);
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: #d6326a;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -50px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 50px;
+      top: 0;
+    }
+
+    .show-photo-btn {
+      background-color: #d6326a;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .show-photo-btn:hover {
+      background-color: #b02652;
+    }
+
+    .photo-container {
+      max-width: 300px;
+      margin-top: 20px;
+      display: none;
+      transition: all 0.5s;
+    }
+
+    .photo-container.visible {
+      display: block;
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      user-select: none;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="heart-container" id="heartContainer" aria-label="Coração interativo com frases amorosas">
+    <div class="phrase" id="phraseText">Eu te amo</div>
+    <div class="heart"></div>
+  </div>
+
+  <button class="show-photo-btn" id="showPhotoBtn" aria-pressed="false" aria-controls="photoContainer">
+    Clique aqui para ver uma foto 📷
+  </button>
+
+  <div class="photo-container" id="photoContainer" role="region" aria-live="polite" aria-label="Foto do namorado">
+    <img
+      src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=320&q=80"
+      alt="Foto especial do presente"
+    />
+  </div>
+
+  <script>
+    const phrases = [
+      "Eu te amo",
+      "Você é meu mundo",
+      "Penso em você todos os dias",
+      "Seu sorriso ilumina tudo",
+      "Para sempre ao seu lado 💖"
+    ];
+
+    const heartContainer = document.getElementById('heartContainer');
+    const phraseText = document.getElementById('phraseText');
+    let currentIndex = 0;
+
+    heartContainer.addEventListener('click', () => {
+      phraseText.style.opacity = '0';
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % phrases.length;
+        phraseText.textContent = phrases[currentIndex];
+        phraseText.style.opacity = '1';
+      }, 400);
+    });
+
+    const showPhotoBtn = document.getElementById('showPhotoBtn');
+    const photoContainer = document.getElementById('photoContainer');
+    let photoVisible = false;
+
+    showPhotoBtn.addEventListener('click', () => {
+      photoVisible = !photoVisible;
+      if (photoVisible) {
+        photoContainer.classList.add('visible');
+        showPhotoBtn.setAttribute('aria-pressed', 'true');
+        showPhotoBtn.textContent = "Esconder foto ❌";
+      } else {
+        photoContainer.classList.remove('visible');
+        showPhotoBtn.setAttribute('aria-pressed', 'false');
+        showPhotoBtn.textContent = "Clique aqui para ver uma foto 📷";
+      }
+    });
+  </script>
+</body>
+</html>
