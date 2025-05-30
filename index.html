@@ -34,30 +34,36 @@
     }
 
     .heart {
-      position: relative;
       width: 100px;
       height: 90px;
+      position: relative;
       margin: 0 auto;
-      transform: rotate(-45deg);
     }
 
     .heart::before,
     .heart::after {
       content: "";
       position: absolute;
-      width: 100px;
-      height: 100px;
+      width: 50px;
+      height: 80px;
       background: #d6326a;
-      border-radius: 50%;
+      border-radius: 50px 50px 0 0;
     }
 
     .heart::before {
-      top: -50px;
       left: 0;
+      transform: rotate(-45deg);
+      transform-origin: bottom right;
     }
 
     .heart::after {
-      left: 50px;
+      right: 0;
+      transform: rotate(45deg);
+      transform-origin: bottom left;
+    }
+
+    .heart::before,
+    .heart::after {
       top: 0;
     }
 
