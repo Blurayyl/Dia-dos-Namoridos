@@ -20,11 +20,10 @@
       overflow-x: hidden;
     }
 
-   
-
     .phrase {
       font-size: 1.4em;
       transition: opacity 0.4s;
+      cursor: pointer;
     }
 
     .show-photo-btn {
@@ -36,39 +35,40 @@
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin-top: 20px;
     }
 
     .show-photo-btn:hover {
       background-color: #b02652;
     }
 
-   .photo-container {
-  position: fixed; /* fixa na tela */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 90vw;
-  max-height: 90vh;
-  display: none;
-  z-index: 999; /* fica na frente */
-  background: rgba(255, 230, 240, 0.9);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(214, 50, 106, 0.7);
-}
+    .photo-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 90vw;
+      max-height: 90vh;
+      display: none;
+      z-index: 999;
+      background: rgba(255, 230, 240, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(214, 50, 106, 0.7);
+    }
 
-.photo-container.visible {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .photo-container.visible {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.photo-container img {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 15px;
-  user-select: none;
-}
+    .photo-container img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 15px;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -77,7 +77,7 @@
   </div>
 
   <button class="show-photo-btn" id="showPhotoBtn" aria-pressed="false" aria-controls="photoContainer">
-    Dê uma olhadinha aqui!!
+    Clique aqui para ver uma foto 📷
   </button>
 
   <div class="photo-container" id="photoContainer" role="region" aria-live="polite" aria-label="Foto do namorado">
@@ -86,13 +86,6 @@
       alt="Foto especial do presente"
     />
   </div>
-
-<div class="photo-container" id="photoContainer" role="region" aria-live="polite" aria-label="Foto do namorado">
-  <img
-    src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=320&q=80"
-    alt="Foto especial do presente"
-  />
-</div>
 
   <script>
     const phrases = [
@@ -132,5 +125,6 @@
         showPhotoBtn.textContent = "Clique aqui para ver uma foto 📷";
       }
     });
+  </script>
 </body>
 </html>
