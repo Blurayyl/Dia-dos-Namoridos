@@ -155,7 +155,8 @@
 </div>
 
 <!-- Botão surpresa que leva para a carta -->
-<a href="carta definitiva.html" class="surprise-btn" aria-label="Ir para carta surpresa">Surprise 🎉</a>
+<button id="openLetterBtn" class="surprise-btn" aria-label="Abrir carta definitiva">Surprise 🎉</button>
+
 
 <script>
   const phrases = [
@@ -357,6 +358,21 @@ window.addEventListener("click", function(event) {
     showModal();
   }
 });
+ 
+<!-- Carta embutida -->
+<div class="photo-container" id="letterContainer">
+  <iframe src="definitiva.html" style="width: 100%; height: 80vh; border: none; border-radius: 15px;"></iframe>
+</div>
+
+<script>
+  const openLetterBtn = document.getElementById('openLetterBtn');
+  const letterContainer = document.getElementById('letterContainer');
+
+  openLetterBtn.addEventListener('click', () => {
+    letterContainer.classList.add('visible');
+    openLetterBtn.style.display = 'none';
+  });
+</script>
 
 
 </script>
