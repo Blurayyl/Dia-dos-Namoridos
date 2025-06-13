@@ -7,7 +7,7 @@
 <style>
   body {
     margin: 0;
-    background: #ffe6f0;
+    background: #ffa9cb;
     font-family: 'Quicksand', sans-serif;
     display: flex;
     flex-direction: column;
@@ -349,10 +349,15 @@
 
   span.onclick = () => modal.style.display = "none";
   window.onclick = (event) => {
-    if (event.target !== span && !modal.contains(event.target)) {
-      showModal();
-    }
-  };
+  const clickedInsidePhrase = event.target.closest('.phrase');
+  if (
+    event.target !== span &&
+    !modal.contains(event.target) &&
+    !clickedInsidePhrase
+  ) {
+    showModal();
+  }
+};
 </script>
 
 </body>
