@@ -348,16 +348,16 @@
   }
 
   span.onclick = () => modal.style.display = "none";
-  window.onclick = (event) => {
-  const clickedInsidePhrase = event.target.closest('.phrase');
-  if (
-    event.target !== span &&
-    !modal.contains(event.target) &&
-    !clickedInsidePhrase
-  ) {
+ window.addEventListener("click", function(event) {
+  const isInPhrase = event.target.closest('.phrase');
+  const isInModal = event.target.closest('.modal');
+  const isInButton = event.target.closest('button') || event.target.closest('a');
+
+  if (!isInPhrase && !isInModal && !isInButton) {
     showModal();
   }
-};
+});
+
 </script>
 
 </body>
