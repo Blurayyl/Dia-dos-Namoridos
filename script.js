@@ -52,3 +52,26 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = 'none';
   });
 });
+
+
+const paragraphs = document.querySelectorAll('p.typing');
+
+async function typeWriter(element, text, delay = 30) {
+  element.textContent = "";
+  for (let i = 0; i < text.length; i++) {
+    element.textContent += text.charAt(i);
+    await new Promise(r => setTimeout(r, delay));
+  }
+}
+
+async function typeAll() {
+  for (const p of paragraphs) {
+    const text = p.getAttribute("data-text");
+    await typeWriter(p, text);
+    await new Promise(r => setTimeout(r, 300));
+  }
+}
+
+window.onload = () => {
+  typeAll();
+};
