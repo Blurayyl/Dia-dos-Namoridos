@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Presente para Você 💖</title>
+  <style>
+    body {
+      background: #ffa9cb;
+      font-family: 'Quicksand', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    .surprise-btn {
+      background-color: #6a4c93;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.2em;
+      border-radius: 15px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: background-color 0.3s;
+    }
+    .surprise-btn:hover {
+      background-color: #563d75;
+    }
+    .photo-container {
+      display: none;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    iframe {
+      width: 90%;
+      height: 80vh;
+      border: none;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Feliz Dia dos Namorados! 🌸</h1>
+  <p>Clique no botão para ver sua cartinha 💌</p>
+  <button id="openLetterBtn" class="surprise-btn">Surprise 🎉</button>
+
+  <div class="photo-container" id="letterContainer">
+    <iframe src="definitiva.html"></iframe>
+  </div>
+
+  <script>
+    const openLetterBtn = document.getElementById('openLetterBtn');
+    const letterContainer = document.getElementById('letterContainer');
+
+    openLetterBtn.addEventListener('click', () => {
+      letterContainer.style.display = 'flex';
+      openLetterBtn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

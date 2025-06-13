@@ -132,6 +132,47 @@
   .surprise-btn:hover {
     background-color: #563d75;
   }
+
+  /* Modal para a carta */
+  #letterModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 600px;
+    height: 80vh;
+    background: rgba(255, 230, 240, 0.98);
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(214, 50, 106, 0.7);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10000;
+  }
+
+  #letterModal iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    border: none;
+  }
+
+  #closeLetter {
+    margin-top: 12px;
+    padding: 8px 20px;
+    background-color: #d6326a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+  }
+
+  #closeLetter:hover {
+    background-color: #b02652;
+  }
 </style>
 </head>
 <body>
@@ -154,9 +195,14 @@
   <a href="https://www.canva.com/design/DAGTBqZe00s/pKRvufDqGS0TbPg-9ce3xw/view?utm_content=DAGTBqZe00s&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">A de RayBaby</a>
 </div>
 
-<!-- Botão surpresa que leva para a carta -->
-<button id="openLetterBtn" class="surprise-btn" aria-label="Abrir carta definitiva">Surprise 🎉</button>
+<!-- Botão Surprise atualizado -->
+<button id="surpriseBtn" class="surprise-btn" aria-label="Abrir carta definitiva">Surprise 🎉</button>
 
+<!-- Modal para carta definitiva -->
+<div id="letterModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <iframe src="carta%20definitiva.html" title="Carta Definitiva"></iframe>
+  <button id="closeLetter" aria-label="Fechar carta">Fechar Carta</button>
+</div>
 
 <script>
   const phrases = [
@@ -235,147 +281,20 @@
       showPhotoBtn.textContent = "Clique aqui para ver uma foto 📷";
     }
   });
-</script>
-<link rel="stylesheet" href="style.css" />
-<script src="script.js" defer></script>
-<style>.modal {
-  display: none;
-  position: fixed;
-  z-index: 9998;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-}
 
-.modal-content {
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 20px;
-  border-radius: 15px;
-  width: 80%;
-  max-width: 400px;
-  text-align: center;
-  color: #d6326a;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
+  // Modal carta definitiva
+  const surpriseBtn = document.getElementById('surpriseBtn');
+  const letterModal = document.getElementById('letterModal');
+  const closeLetter = document.getElementById('closeLetter');
 
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: -10px;
-  margin-right: -10px;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  color: black;
-}
-</style>
-<!-- Modal Surpresa -->
-<div id="surpriseModal" class="modal">
-  <div class="modal-content">
-    <span class="close-button">&times;</span>
-    <h2>🎉 Surpresa!</h2>
-    <p>Tu é tão gay quanto esses confetes!</p>
-  </div>
-</div>
-<canvas id="confetti-canvas"></canvas>
-
-<script>
-  // Confete com JS puro
-  const confettiCanvas = document.getElementById('confetti-canvas');
-  confettiCanvas.style.position = 'fixed';
-  confettiCanvas.style.top = '0';
-  confettiCanvas.style.left = '0';
-  confettiCanvas.style.width = '100vw';
-  confettiCanvas.style.height = '100vh';
-  confettiCanvas.style.pointerEvents = 'none';
-  confettiCanvas.style.zIndex = '9999';
-
-  const ctx = confettiCanvas.getContext('2d');
-  let confetti = [];
-
-  function createConfettiPiece() {
-    return {
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight - 50,
-      radius: Math.random() * 6 + 4,
-      color: `hsl(${Math.random() * 360}, 100%, 60%)`,
-      speed: Math.random() * 3 + 2,
-      drift: Math.random() * 2 - 1
-    };
-  }
-
-  function launchConfetti() {
-    for (let i = 0; i < 150; i++) {
-      confetti.push(createConfettiPiece());
-    }
-  }
-
-  function updateConfetti() {
-    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-    confetti.forEach(p => {
-      p.y += p.speed;
-      p.x += p.drift;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = p.color;
-      ctx.fill();
-    });
-    confetti = confetti.filter(p => p.y < window.innerHeight);
-    requestAnimationFrame(updateConfetti);
-  }
-
-  window.addEventListener('resize', () => {
-    confettiCanvas.width = window.innerWidth;
-    confettiCanvas.height = window.innerHeight;
+  surpriseBtn.addEventListener('click', () => {
+    letterModal.style.display = 'flex';
   });
 
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
-
-  // Modal
-  const modal = document.getElementById("surpriseModal");
-  const span = document.querySelector(".close-button");
-
-  function showModal() {
-    modal.style.display = "block";
-    launchConfetti();
-    updateConfetti();
-  }
-
-  span.onclick = () => modal.style.display = "none";
-window.addEventListener("click", function(event) {
-  const isInPhrase = event.target.id === 'phraseText';
-  const isInModal = event.target.closest('.modal');
-  const isInButton = event.target.closest('button') || event.target.closest('a');
-
-  if (!isInPhrase && !isInModal && !isInButton) {
-    showModal();
-  }
-});
- 
-</script>
-
-<!-- Carta embutida -->
-<div class="photo-container" id="letterContainer">
-  <iframe src="definitiva.html" style="width: 100%; height: 80vh; border: none; border-radius: 15px;"></iframe>
-</div>
-
-<script>
-  const openLetterBtn = document.getElementById('openLetterBtn');
-  const letterContainer = document.getElementById('letterContainer');
-
-  openLetterBtn.addEventListener('click', () => {
-    letterContainer.classList.add('visible');
-    openLetterBtn.style.display = 'none';
+  closeLetter.addEventListener('click', () => {
+    letterModal.style.display = 'none';
   });
 </script>
-
 
 </body>
 </html>
