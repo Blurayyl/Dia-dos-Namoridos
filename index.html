@@ -348,8 +348,8 @@
   }
 
   span.onclick = () => modal.style.display = "none";
- window.addEventListener("click", function(event) {
-  const isInPhrase = event.target.closest('.phrase');
+window.addEventListener("click", function(event) {
+  const isInPhrase = event.target.id === 'phraseText';
   const isInModal = event.target.closest('.modal');
   const isInButton = event.target.closest('button') || event.target.closest('a');
 
@@ -357,6 +357,7 @@
     showModal();
   }
 });
+
 
 </script>
 
